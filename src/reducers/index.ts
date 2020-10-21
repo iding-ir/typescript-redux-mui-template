@@ -2,11 +2,11 @@ import { Reducer, combineReducers } from "redux";
 
 import sidebarReducer, { IStateSidebar } from "./sidebar";
 
-export interface IReduxAppState {
+export interface IState {
   sidebar: IStateSidebar;
 }
 
-const combinedReducers: Reducer<IReduxAppState> = combineReducers({
+const combinedReducers: Reducer<IState> = combineReducers({
   sidebar: sidebarReducer,
 });
 

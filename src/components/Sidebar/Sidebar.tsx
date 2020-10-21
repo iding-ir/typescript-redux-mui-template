@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import { drawerWidth } from "../../constants";
 import { toggleSidebar } from "../../actions/sidebar";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../router/routes";
+import { IState } from "../../reducers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,9 +62,9 @@ const Sidebar = (props: IPropsSidebar) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [open, setOpen] = React.useState<any>({});
+  const [open, setOpen] = React.useState<{ [key: string]: boolean }>({});
 
-  const sidebarOpen = useSelector((state: any) => state.sidebar.open);
+  const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
 
   const handleDrawerToggle = () => {
     dispatch(toggleSidebar());
