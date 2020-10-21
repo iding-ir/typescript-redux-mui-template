@@ -4,12 +4,14 @@ export default {
   },
   sidebar: {
     inbox: "Inbox",
-    starred: "Starred",
-    send: "Send email",
-    drafts: "Drafts",
-    all: "All mail",
-    trash: "Trash",
-    spam: "Spam",
+    profile: "Profile",
+    multimedia: "Multimedia",
+    photo: "Photo",
+    video: "Video",
+    audio: "Audio",
+    schedule: "Schedule",
+    notes: "Notes",
+    settings: "Settings",
   },
   content: {
     p1:

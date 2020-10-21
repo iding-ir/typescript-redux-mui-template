@@ -16,12 +16,14 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import Collapse from "@material-ui/core/Collapse";
 import { useTranslation } from "react-i18next";
 
 import { drawerWidth } from "../../constants";
 import { closeSidebar } from "../../actions/sidebar";
+import { routes, IRoute, IRouteGroup, IRoutes } from "../../router/routes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -56,6 +58,9 @@ const useStyles = makeStyles((theme: Theme) =>
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
     },
+    nested: {
+      paddingLeft: theme.spacing(4),
+    },
   })
 );
 
@@ -66,35 +71,71 @@ const Sidebar = (props: IPropsSidebar) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [open, setOpen] = React.useState<any>({});
 
-  const open = useSelector((state: any) => state.sidebar.open);
+  const sidebarOpen = useSelector((state: any) => state.sidebar.open);
 
   const handleDrawerClose = () => {
     dispatch(closeSidebar());
   };
 
-  const renderList = (list: string[]) => {
-    return list.map((text, index) => (
-      <ListItem button key={text}>
-        <ListItemIcon>
-          {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-        </ListItemIcon>
-        <ListItemText primary={text} />
-      </ListItem>
-    ));
+  const renderList = (list: IRoutes, nested: boolean) => {
+    const renderItems = () => {
+      return list.map((item: IRoute | IRouteGroup) => {
+        const handleClick = () => {
+          setOpen({ ...open, [item.key]: !open[item.key] });
+        };
+
+        const className = clsx({
+          [classes.nested]: nested,
+        });
+
+        const renderCollapse = () => {
+          if ("items" in item) {
+            return (
+              <Collapse in={open[item.key]} timeout="auto" unmountOnExit>
+                {renderList(item.items, true)}
+              </Collapse>
+            );
+          }
+        };
+
+        const renderCollapseIcon = () => {
+          if ("items" in item) {
+            return open[item.key] ? <ExpandLess /> : <ExpandMore />;
+          }
+        };
+
+        return (
+          <div key={item.key}>
+            <ListItem button className={className} onClick={handleClick}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+
+              <ListItemText primary={t(item.label)} />
+
+              {renderCollapseIcon()}
+            </ListItem>
+
+            {renderCollapse()}
+          </div>
+        );
+      });
+    };
+
+    return <List>{renderItems()}</List>;
   };
 
   return (
     <Drawer
       variant="permanent"
       className={clsx(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
+        [classes.drawerOpen]: sidebarOpen,
+        [classes.drawerClose]: !sidebarOpen,
       })}
       classes={{
         paper: clsx({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
+          [classes.drawerOpen]: sidebarOpen,
+          [classes.drawerClose]: !sidebarOpen,
         }),
       }}
     >
@@ -110,20 +151,7 @@ const Sidebar = (props: IPropsSidebar) => {
 
       <Divider />
 
-      <List>
-        {renderList([
-          t("sidebar.inbox"),
-          t("sidebar.starred"),
-          t("sidebar.send"),
-          t("sidebar.drafts"),
-        ])}
-      </List>
-
-      <Divider />
-
-      <List>
-        {renderList([t("sidebar.all"), t("sidebar.trash"), t("sidebar.spam")])}
-      </List>
+      {renderList(routes, false)}
     </Drawer>
   );
 };
