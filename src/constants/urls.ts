@@ -1,0 +1,9 @@
+export const inbox = "/inbox";
+export const profile = "/profile";
+export const multimedia = "/multimedia";
+export const photo = "/photo";
+export const video = "/video";
+export const audio = "/audio";
+export const schedule = "/schedule";
+export const notes = "/notes";
+export const settings = "/settings";

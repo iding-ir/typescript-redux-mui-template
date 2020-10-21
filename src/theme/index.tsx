@@ -1,19 +1,20 @@
-import { teal, amber } from "@material-ui/core/colors";
 import { createMuiTheme } from "@material-ui/core/styles";
+
+import { primary, secondary } from "./colors";
 
 const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      light: teal[200],
-      main: teal[400],
-      dark: teal[800],
+      light: primary[200],
+      main: primary[400],
+      dark: primary[800],
       contrastText: "#ffffff",
     },
     secondary: {
-      light: amber[200],
-      main: amber[400],
-      dark: amber[800],
+      light: secondary[200],
+      main: secondary[400],
+      dark: secondary[800],
       contrastText: "#000000",
     },
   },

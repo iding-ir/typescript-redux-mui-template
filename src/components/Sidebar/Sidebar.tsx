@@ -20,6 +20,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import { drawerWidth } from "../../constants";
 import { closeSidebar } from "../../actions/sidebar";
@@ -60,6 +61,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     nested: {
       paddingLeft: theme.spacing(4),
+    },
+    link: {
+      display: "flex",
+      width: "100%",
+      textDecoration: "none",
+      color: theme.palette.primary.contrastText,
+    },
+    linkLabel: {
+      flexGrow: 10,
     },
   })
 );
@@ -106,14 +116,27 @@ const Sidebar = (props: IPropsSidebar) => {
           }
         };
 
+        const onClick = () => {
+          if (item.action) {
+            item.action();
+          }
+
+          handleClick();
+        };
+
         return (
           <div key={item.key}>
-            <ListItem button className={className} onClick={handleClick}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItem button className={className} onClick={onClick}>
+              <Link to={item.url || ""} className={classes.link}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
 
-              <ListItemText primary={t(item.label)} />
+                <ListItemText
+                  primary={t(item.label)}
+                  className={classes.linkLabel}
+                />
 
-              {renderCollapseIcon()}
+                {renderCollapseIcon()}
+              </Link>
             </ListItem>
 
             {renderCollapse()}

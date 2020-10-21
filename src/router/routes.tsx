@@ -9,10 +9,14 @@ import Schedule from "@material-ui/icons/Alarm";
 import Notes from "@material-ui/icons/EventNote";
 import Settings from "@material-ui/icons/Settings";
 
+import * as URLS from "../constants/urls";
+
 export interface IRoute {
   key: string;
   label: string;
   icon: JSX.Element;
+  url?: string;
+  action?: () => void;
 }
 
 export interface IRouteGroup extends IRoute {
@@ -23,50 +27,65 @@ export type IRoutes = (IRoute | IRouteGroup)[];
 
 export const routes: IRoutes = [
   {
-    key: 'inbox',
+    key: "inbox",
     label: "sidebar.inbox",
     icon: <Inbox />,
+    url: URLS.inbox,
   },
   {
-    key: 'profile',
+    key: "profile",
     label: "sidebar.profile",
     icon: <Profile />,
+    url: URLS.profile,
   },
   {
-    key: 'multimedia',
+    key: "multimedia",
     label: "sidebar.multimedia",
     icon: <Multimedia />,
+    // url: URLS.multimedia,
     items: [
       {
-        key: 'photo',
+        key: "photo",
         label: "sidebar.photo",
         icon: <Photo />,
+        url: URLS.photo,
       },
       {
-        key: 'video',
+        key: "video",
         label: "sidebar.video",
         icon: <Video />,
+        url: URLS.video,
       },
       {
-        key: 'audio',
+        key: "audio",
         label: "sidebar.audio",
         icon: <Audio />,
+        url: URLS.audio,
       },
     ],
   },
   {
-    key: 'schedule',
+    key: "schedule",
     label: "sidebar.schedule",
     icon: <Schedule />,
+    // url: URLS.schedule,
+    action: () => {
+      console.log("Clicked!");
+    },
   },
   {
-    key: 'notes',
+    key: "notes",
     label: "sidebar.notes",
     icon: <Notes />,
+    url: URLS.notes,
   },
   {
-    key: 'settings',
+    key: "settings",
     label: "sidebar.settings",
     icon: <Settings />,
+    // url: URLS.settings,
+    action: () => {
+      console.log("Clicked!");
+    },
   },
 ];
