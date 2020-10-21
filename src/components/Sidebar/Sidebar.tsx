@@ -18,6 +18,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import { useTranslation } from "react-i18next";
 
 import { drawerWidth } from "../../constants";
 import { closeSidebar } from "../../actions/sidebar";
@@ -64,11 +65,23 @@ const Sidebar = (props: IPropsSidebar) => {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const open = useSelector((state: any) => state.sidebar.open);
 
   const handleDrawerClose = () => {
     dispatch(closeSidebar());
+  };
+
+  const renderList = (list: string[]) => {
+    return list.map((text, index) => (
+      <ListItem button key={text}>
+        <ListItemIcon>
+          {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+        </ListItemIcon>
+        <ListItemText primary={text} />
+      </ListItem>
+    ));
   };
 
   return (
@@ -98,27 +111,18 @@ const Sidebar = (props: IPropsSidebar) => {
       <Divider />
 
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {renderList([
+          t("sidebar.inbox"),
+          t("sidebar.starred"),
+          t("sidebar.send"),
+          t("sidebar.drafts"),
+        ])}
       </List>
 
       <Divider />
 
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {renderList([t("sidebar.all"), t("sidebar.trash"), t("sidebar.spam")])}
       </List>
     </Drawer>
   );

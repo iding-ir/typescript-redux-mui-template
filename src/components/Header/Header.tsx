@@ -7,6 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import { useTranslation } from "react-i18next";
 
 import { drawerWidth } from "../../constants";
 import { openSidebar } from "../../actions/sidebar";
@@ -42,6 +43,7 @@ interface IPropsHeader {}
 const Header = (props: IPropsHeader) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const open = useSelector((state: any) => state.sidebar.open);
 
@@ -70,7 +72,7 @@ const Header = (props: IPropsHeader) => {
         </IconButton>
 
         <Typography variant="h6" noWrap>
-          Mini variant drawer
+          {t("header.title")}
         </Typography>
       </Toolbar>
     </AppBar>

@@ -8,13 +8,14 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./stores";
 import theme from "./theme";
+import "./localization";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        
+
         <App />
       </ThemeProvider>
     </Provider>
