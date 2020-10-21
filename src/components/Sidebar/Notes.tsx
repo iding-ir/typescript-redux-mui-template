@@ -25,13 +25,19 @@ const Notes = () => {
       </ListItemIcon>
 
       <FormControlLabel
-        control={<Switch checked={notes} color="primary" name="checkedA" />}
+        control={
+          <Switch
+            checked={notes}
+            color="primary"
+            name="checkedA"
+            onClick={() => {
+              dispatch(toggleSidebarSwitch("notes"));
+            }}
+          />
+        }
         label={t("sidebar.notes")}
         labelPlacement="start"
         className="sidebar-toggle"
-        onClick={() => {
-          dispatch(toggleSidebarSwitch("notes"));
-        }}
       />
     </ListItem>
   );
