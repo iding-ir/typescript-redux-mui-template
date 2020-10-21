@@ -45,7 +45,7 @@ const Header = (props: IPropsHeader) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const open = useSelector((state: any) => state.sidebar.open);
+  const sidebarOpen = useSelector((state: any) => state.sidebar.open);
 
   const handleDrawerOpen = () => {
     dispatch(openSidebar());
@@ -55,7 +55,7 @@ const Header = (props: IPropsHeader) => {
     <AppBar
       position="fixed"
       className={clsx(classes.appBar, {
-        [classes.appBarShift]: open,
+        [classes.appBarShift]: sidebarOpen,
       })}
     >
       <Toolbar>
@@ -65,7 +65,7 @@ const Header = (props: IPropsHeader) => {
           onClick={handleDrawerOpen}
           edge="start"
           className={clsx(classes.menuButton, {
-            [classes.hide]: open,
+            [classes.hide]: sidebarOpen,
           })}
         >
           <MenuIcon />

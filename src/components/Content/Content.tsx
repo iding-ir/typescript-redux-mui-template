@@ -5,9 +5,6 @@ import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: "flex",
-    },
     toolbar: {
       display: "flex",
       alignItems: "center",

@@ -68,9 +68,6 @@ const useStyles = makeStyles((theme: Theme) =>
       textDecoration: "none",
       color: theme.palette.primary.contrastText,
     },
-    linkLabel: {
-      flexGrow: 10,
-    },
   })
 );
 
@@ -90,8 +87,8 @@ const Sidebar = (props: IPropsSidebar) => {
   };
 
   const renderList = (list: IRoutes, nested: boolean) => {
-    const renderItems = () => {
-      return list.map((item: IRoute | IRouteGroup) => {
+    const renderItems = () =>
+      list.map((item: IRoute | IRouteGroup) => {
         const handleClick = () => {
           setOpen({ ...open, [item.key]: !open[item.key] });
         };
@@ -130,10 +127,7 @@ const Sidebar = (props: IPropsSidebar) => {
               <Link to={item.url || ""} className={classes.link}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
 
-                <ListItemText
-                  primary={t(item.label)}
-                  className={classes.linkLabel}
-                />
+                <ListItemText primary={t(item.label)} />
 
                 {renderCollapseIcon()}
               </Link>
@@ -143,7 +137,6 @@ const Sidebar = (props: IPropsSidebar) => {
           </div>
         );
       });
-    };
 
     return <List>{renderItems()}</List>;
   };
