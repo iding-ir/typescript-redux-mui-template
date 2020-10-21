@@ -1,22 +1,24 @@
 import React from "react";
 import Inbox from "@material-ui/icons/Inbox";
-import Profile from "@material-ui/icons/AccountBox";
-import Multimedia from "@material-ui/icons/PermMedia";
-import Photo from "@material-ui/icons/PhotoCamera";
-import Video from "@material-ui/icons/Movie";
-import Audio from "@material-ui/icons/Audiotrack";
-import Schedule from "@material-ui/icons/Alarm";
-import Notes from "@material-ui/icons/EventNote";
-import Settings from "@material-ui/icons/Settings";
+import ProfileIcon from "@material-ui/icons/AccountBox";
+import MultimediaIcon from "@material-ui/icons/PermMedia";
+import PhotoIcon from "@material-ui/icons/PhotoCamera";
+import VideoIcon from "@material-ui/icons/Movie";
+import AudioIcon from "@material-ui/icons/Audiotrack";
+import ScheduleIcon from "@material-ui/icons/Alarm";
+// import NotesIcon from "@material-ui/icons/EventNote";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 import * as URLS from "../constants/urls";
+import Notes from "../components/Sidebar/Notes";
 
 export interface IRoute {
   key: string;
-  label: string;
-  icon: JSX.Element;
+  label?: string;
+  icon?: JSX.Element;
   url?: string;
   action?: () => void;
+  custom?: JSX.Element;
 }
 
 export interface IRouteGroup extends IRoute {
@@ -35,31 +37,31 @@ export const routes: IRoutes = [
   {
     key: "profile",
     label: "sidebar.profile",
-    icon: <Profile />,
+    icon: <ProfileIcon />,
     url: URLS.profile,
   },
   {
     key: "multimedia",
     label: "sidebar.multimedia",
-    icon: <Multimedia />,
+    icon: <MultimediaIcon />,
     // url: URLS.multimedia,
     items: [
       {
         key: "photo",
         label: "sidebar.photo",
-        icon: <Photo />,
+        icon: <PhotoIcon />,
         url: URLS.photo,
       },
       {
         key: "video",
         label: "sidebar.video",
-        icon: <Video />,
+        icon: <VideoIcon />,
         url: URLS.video,
       },
       {
         key: "audio",
         label: "sidebar.audio",
-        icon: <Audio />,
+        icon: <AudioIcon />,
         url: URLS.audio,
       },
     ],
@@ -67,7 +69,7 @@ export const routes: IRoutes = [
   {
     key: "schedule",
     label: "sidebar.schedule",
-    icon: <Schedule />,
+    icon: <ScheduleIcon />,
     // url: URLS.schedule,
     action: () => {
       console.log("Clicked!");
@@ -75,14 +77,15 @@ export const routes: IRoutes = [
   },
   {
     key: "notes",
-    label: "sidebar.notes",
-    icon: <Notes />,
-    url: URLS.notes,
+    // label: "sidebar.notes",
+    // icon: <NotesIcon />,
+    // url: URLS.notes,
+    custom: <Notes />,
   },
   {
     key: "settings",
     label: "sidebar.settings",
-    icon: <Settings />,
+    icon: <SettingsIcon />,
     // url: URLS.settings,
     action: () => {
       console.log("Clicked!");

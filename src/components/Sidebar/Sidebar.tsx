@@ -105,17 +105,27 @@ const Sidebar = (props: IPropsSidebar) => {
           handleClick();
         };
 
+        const renderItem = () => {
+          if (item.custom) {
+            return item.custom;
+          } else if (item.label) {
+            return (
+              <ListItem button className={className} onClick={onClick}>
+                <Link to={item.url || ""} className={classes.link}>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+
+                  <ListItemText primary={t(item.label)} />
+
+                  {renderCollapseIcon()}
+                </Link>
+              </ListItem>
+            );
+          }
+        };
+
         return (
           <div key={item.key}>
-            <ListItem button className={className} onClick={onClick}>
-              <Link to={item.url || ""} className={classes.link}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-
-                <ListItemText primary={t(item.label)} />
-
-                {renderCollapseIcon()}
-              </Link>
-            </ListItem>
+            {renderItem()}
 
             {renderCollapse()}
           </div>

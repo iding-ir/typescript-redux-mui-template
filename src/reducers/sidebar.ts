@@ -2,16 +2,23 @@ import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
   SIDEBAR_TOGGLE,
+  SIDEBAR_SWITCH_TOGGLE,
 } from "../constants/redux";
 
 import { IActionSidebar } from "../actions/sidebar";
 
 export interface IStateSidebar {
   open: boolean;
+  switches: {
+    [key: string]: boolean;
+  };
 }
 
 const initialState: IStateSidebar = {
   open: false,
+  switches: {
+    notes: true,
+  },
 };
 
 const reducer = (state = initialState, action: IActionSidebar) => {
@@ -22,6 +29,20 @@ const reducer = (state = initialState, action: IActionSidebar) => {
       return { ...state, open: false };
     case SIDEBAR_TOGGLE:
       return { ...state, open: !state.open };
+    case SIDEBAR_SWITCH_TOGGLE:
+      const value: any = {};
+
+      if (action.payload) {
+        value[action.payload] = !state.switches[action.payload];
+      }
+
+      return {
+        ...state,
+        switches: {
+          ...state.switches,
+          ...value,
+        },
+      };
     default:
       return state;
   }
