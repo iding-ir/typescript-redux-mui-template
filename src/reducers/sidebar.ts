@@ -3,7 +3,9 @@ import {
   SIDEBAR_CLOSE,
   SIDEBAR_TOGGLE,
   SIDEBAR_SWITCH_TOGGLE,
+  SIDEBAR_PAGE_SELECT,
 } from "../constants/redux";
+import { routes } from "../router/routes";
 
 import { IActionSidebar } from "../actions/sidebar";
 
@@ -12,6 +14,7 @@ export interface IStateSidebar {
   switches: {
     [key: string]: boolean;
   };
+  selectedPage: any;
 }
 
 const initialState: IStateSidebar = {
@@ -19,6 +22,7 @@ const initialState: IStateSidebar = {
   switches: {
     notes: true,
   },
+  selectedPage: routes[0].key,
 };
 
 const reducer = (state = initialState, action: IActionSidebar) => {
@@ -32,7 +36,7 @@ const reducer = (state = initialState, action: IActionSidebar) => {
     case SIDEBAR_SWITCH_TOGGLE:
       const value: any = {};
 
-      if (action.payload) {
+      if (typeof action.payload === "string") {
         value[action.payload] = !state.switches[action.payload];
       }
 
@@ -43,6 +47,8 @@ const reducer = (state = initialState, action: IActionSidebar) => {
           ...value,
         },
       };
+    case SIDEBAR_PAGE_SELECT:
+      return { ...state, selectedPage: action.payload };
     default:
       return state;
   }

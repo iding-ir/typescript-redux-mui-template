@@ -11,12 +11,14 @@ import SettingsIcon from "@material-ui/icons/Settings";
 
 import * as URLS from "../constants/urls";
 import Notes from "../components/Sidebar/Notes";
+import Profile from "../pages/Profile";
 
 export interface IRoute {
   key: string;
   label?: string;
   icon?: JSX.Element;
   url?: string;
+  content?: JSX.Element;
   action?: () => void;
   custom?: JSX.Element;
 }
@@ -39,6 +41,7 @@ export const routes: IRoutes = [
     label: "sidebar.profile",
     icon: <ProfileIcon />,
     url: URLS.profile,
+    content: <Profile />,
   },
   {
     key: "multimedia",

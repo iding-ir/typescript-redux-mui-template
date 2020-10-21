@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { drawerWidth } from "../../constants";
-import { toggleSidebar } from "../../actions/sidebar";
+import { toggleSidebar, selectPage } from "../../actions/sidebar";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../router/routes";
 import { IState } from "../../reducers";
 
@@ -73,10 +73,6 @@ const Sidebar = (props: IPropsSidebar) => {
   const renderList = (list: IRoutes, nested: boolean) => {
     const renderItems = () =>
       list.map((item: IRoute | IRouteGroup) => {
-        const handleClick = () => {
-          setOpen({ ...open, [item.key]: !open[item.key] });
-        };
-
         const className = clsx({
           [classes.nested]: nested,
         });
@@ -102,7 +98,11 @@ const Sidebar = (props: IPropsSidebar) => {
             item.action();
           }
 
-          handleClick();
+          if (item.url) {
+            dispatch(selectPage(item.key));
+          }
+
+          setOpen({ ...open, [item.key]: !open[item.key] });
         };
 
         const renderItem = () => {
