@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import clsx from "clsx";
+import { useDispatch } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -15,25 +14,16 @@ import { openSidebar } from "../../actions/sidebar";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
+      [theme.breakpoints.up("sm")]: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+      },
     },
     menuButton: {
-      marginRight: 36,
-    },
-    hide: {
-      display: "none",
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up("sm")]: {
+        display: "none",
+      },
     },
   })
 );
@@ -45,28 +35,19 @@ const Header = (props: IPropsHeader) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const sidebarOpen = useSelector((state: any) => state.sidebar.open);
-
   const handleDrawerOpen = () => {
     dispatch(openSidebar());
   };
 
   return (
-    <AppBar
-      position="fixed"
-      className={clsx(classes.appBar, {
-        [classes.appBarShift]: sidebarOpen,
-      })}
-    >
+    <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <IconButton
           color="inherit"
           aria-label="open drawer"
-          onClick={handleDrawerOpen}
           edge="start"
-          className={clsx(classes.menuButton, {
-            [classes.hide]: sidebarOpen,
-          })}
+          onClick={handleDrawerOpen}
+          className={classes.menuButton}
         >
           <MenuIcon />
         </IconButton>

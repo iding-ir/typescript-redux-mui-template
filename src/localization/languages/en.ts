@@ -1,8 +1,9 @@
 export default {
   header: {
-    title: "Mini variant drawer",
+    title: "Template",
   },
   sidebar: {
+    title: "Menu",
     inbox: "Inbox",
     profile: "Profile",
     multimedia: "Multimedia",
