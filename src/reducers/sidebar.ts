@@ -12,7 +12,7 @@ export interface IStateSidebar {
   switches: {
     [key: string]: boolean;
   };
-  selected: any;
+  selected: string;
 }
 
 const initialState: IStateSidebar = {

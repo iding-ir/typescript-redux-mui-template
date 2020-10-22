@@ -42,6 +42,12 @@ const Header = (props: IPropsHeader) => {
     dispatch(openSidebar());
   };
 
+  const renderTitle = () => {
+    if (selectedPage.label) {
+      return t(selectedPage.label);
+    }
+  };
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
@@ -56,7 +62,7 @@ const Header = (props: IPropsHeader) => {
         </IconButton>
 
         <Typography variant="h6" noWrap>
-          {t(selectedPage.label)}
+          {renderTitle()}
         </Typography>
       </Toolbar>
     </AppBar>
