@@ -3,12 +3,10 @@ import { IActionModal } from "../actions/modal";
 
 export interface IStateModal {
   open: boolean;
-  content: JSX.Element | undefined;
 }
 
 const initialState: IStateModal = {
   open: false,
-  content: undefined,
 };
 
 const reducer = (state = initialState, action: IActionModal) => {

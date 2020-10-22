@@ -33,7 +33,14 @@ const ItemSettings = () => {
   };
 
   const renderModal = () => {
-    return open && <Modal />;
+    if (open) {
+      return (
+        <Modal
+          title={t("modal.title")}
+          content={<div>{t("modal.content")}</div>}
+        />
+      );
+    }
   };
 
   return (

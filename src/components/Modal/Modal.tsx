@@ -62,6 +62,13 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
 const DialogContent = withStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2),
+    minWidth: "240px",
+    [theme.breakpoints.up("sm")]: {
+      minWidth: "360px",
+    },
+    [theme.breakpoints.up("md")]: {
+      minWidth: "480px",
+    },
   },
 }))(MuiDialogContent);
 
@@ -72,9 +79,13 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-interface IPropsModal {}
+interface IPropsModal {
+  title: string;
+  content: JSX.Element;
+}
 
 const Modal = (props: IPropsModal) => {
+  const { title, content } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -88,16 +99,14 @@ const Modal = (props: IPropsModal) => {
     <div>
       <Dialog onClose={handleClose} aria-labelledby="dialog-title" open={open}>
         <DialogTitle id="dialog-title" onClose={handleClose}>
-          Modal title
+          {title}
         </DialogTitle>
 
-        <DialogContent dividers>
-          <Typography gutterBottom>{t("content.p1")}</Typography>
-        </DialogContent>
+        <DialogContent dividers>{content}</DialogContent>
 
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
+            {t("modal.close")}
           </Button>
         </DialogActions>
       </Dialog>
