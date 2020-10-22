@@ -1,8 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-
 import { useSelector } from "react-redux";
-import { IState } from "../reducers";
 
+import { IState } from "../reducers";
 import { primary, secondary } from "./colors";
 
 const useTheme = () => {

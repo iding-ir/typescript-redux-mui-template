@@ -33,7 +33,7 @@ const reducer = (state = initialState, action: IActionSidebar) => {
     case SIDEBAR_TOGGLE:
       return { ...state, open: !state.open };
     case SIDEBAR_SWITCH_TOGGLE:
-      const value: any = {};
+      const value: { [key: string]: boolean } = {};
 
       if (typeof action.payload === "string") {
         value[action.payload] = !state.switches[action.payload];
