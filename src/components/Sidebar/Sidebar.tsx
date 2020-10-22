@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 
 import { drawerWidth } from "../../constants";
 import { toggleSidebar } from "../../actions/sidebar";
-import { setPageKey, setPageContent } from "../../actions/page";
+import { setPage } from "../../actions/page";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../router/routes";
 import { IState } from "../../reducers";
 
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     // necessary for content to be below app bar
     toolbar: {
+      fontSize: "1.2rem",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -74,9 +75,7 @@ const Sidebar = (props: IPropsSidebar) => {
   const [open, setOpen] = React.useState<{ [key: string]: boolean }>({});
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
-  const selectedPageKey = useSelector(
-    (state: IState) => state.page.selectedPageKey
-  );
+  const selectedPage = useSelector((state: IState) => state.page.selected);
 
   const handleDrawerToggle = () => {
     dispatch(toggleSidebar());
@@ -87,7 +86,7 @@ const Sidebar = (props: IPropsSidebar) => {
       list.map((item: IRoute | IRouteGroup) => {
         const className = clsx(classes.item, {
           [classes.nested]: nested,
-          [classes.selected]: selectedPageKey === item.key,
+          [classes.selected]: selectedPage === item.key,
         });
 
         const renderCollapse = () => {
@@ -112,9 +111,7 @@ const Sidebar = (props: IPropsSidebar) => {
           }
 
           if (item.url && item.content) {
-            dispatch(setPageKey(item.key));
-
-            dispatch(setPageContent(item.content));
+            dispatch(setPage(item));
           }
 
           setOpen({ ...open, [item.key]: !open[item.key] });

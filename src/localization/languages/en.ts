@@ -1,9 +1,6 @@
 export default {
-  header: {
-    title: "Template",
-  },
   sidebar: {
-    title: "Menu",
+    title: "Template",
     inbox: "Inbox",
     profile: "Profile",
     multimedia: "Multimedia",

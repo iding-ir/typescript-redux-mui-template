@@ -4,7 +4,7 @@ export const SIDEBAR_TOGGLE = "SIDEBAR_TOGGLE";
 
 export const SIDEBAR_SWITCH_TOGGLE = "SIDEBAR_SWITCH_TOGGLE";
 
-export const PAGE_SET_KEY = "PAGE_SET_KEY";
+export const PAGE_SET = "PAGE_SET";
 export const PAGE_SET_CONTENT = "PAGE_SET_CONTENT";
 
 export const THEME_CHANGE = "THEME_CHANGE";

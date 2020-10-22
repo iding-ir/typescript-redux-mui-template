@@ -19,15 +19,13 @@ interface IPropsContent {}
 const Content = (props: IPropsContent) => {
   const classes = useStyles();
 
-  const SelectedPageContent = useSelector(
-    (state: IState) => state.page.selectedPageContent || <div />
-  );
+  const selectedPage = useSelector((state: IState) => state.page.selected);
 
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
 
-      {SelectedPageContent}
+      {selectedPage.content}
     </main>
   );
 };

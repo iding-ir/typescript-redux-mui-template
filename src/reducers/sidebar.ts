@@ -12,7 +12,7 @@ export interface IStateSidebar {
   switches: {
     [key: string]: boolean;
   };
-  selectedPageKey: any;
+  selected: any;
 }
 
 const initialState: IStateSidebar = {
@@ -20,7 +20,7 @@ const initialState: IStateSidebar = {
   switches: {
     theme: true,
   },
-  selectedPageKey: routes[0].key,
+  selected: routes[0].key,
 };
 
 const reducer = (state = initialState, action: IActionSidebar) => {

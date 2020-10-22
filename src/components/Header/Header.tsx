@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 
 import { drawerWidth } from "../../constants";
 import { openSidebar } from "../../actions/sidebar";
+import { IState } from "../../reducers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +36,8 @@ const Header = (props: IPropsHeader) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
+  const selectedPage = useSelector((state: IState) => state.page.selected);
+
   const handleDrawerOpen = () => {
     dispatch(openSidebar());
   };
@@ -53,7 +56,7 @@ const Header = (props: IPropsHeader) => {
         </IconButton>
 
         <Typography variant="h6" noWrap>
-          {t("header.title")}
+          {t(selectedPage.label)}
         </Typography>
       </Toolbar>
     </AppBar>
