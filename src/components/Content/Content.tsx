@@ -1,7 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import { useTranslation } from "react-i18next";
+
+import { IState } from "../../reducers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,15 +18,16 @@ interface IPropsContent {}
 
 const Content = (props: IPropsContent) => {
   const classes = useStyles();
-  const { t } = useTranslation();
+
+  const SelectedPageContent = useSelector(
+    (state: IState) => state.page.selectedPageContent || <div />
+  );
 
   return (
     <main className={classes.content}>
       <div className={classes.toolbar} />
 
-      <Typography paragraph>{t("content.p1")}</Typography>
-
-      <Typography paragraph>{t("content.p2")}</Typography>
+      {SelectedPageContent}
     </main>
   );
 };

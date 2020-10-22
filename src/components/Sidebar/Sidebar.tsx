@@ -21,7 +21,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { drawerWidth } from "../../constants";
-import { toggleSidebar, selectPage } from "../../actions/sidebar";
+import { toggleSidebar } from "../../actions/sidebar";
+import { setPageKey, setPageContent } from "../../actions/page";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../router/routes";
 import { IState } from "../../reducers";
 
@@ -73,8 +74,8 @@ const Sidebar = (props: IPropsSidebar) => {
   const [open, setOpen] = React.useState<{ [key: string]: boolean }>({});
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
-  const selectedPage = useSelector(
-    (state: IState) => state.sidebar.selectedPage
+  const selectedPageKey = useSelector(
+    (state: IState) => state.page.selectedPageKey
   );
 
   const handleDrawerToggle = () => {
@@ -86,7 +87,7 @@ const Sidebar = (props: IPropsSidebar) => {
       list.map((item: IRoute | IRouteGroup) => {
         const className = clsx(classes.item, {
           [classes.nested]: nested,
-          [classes.selected]: selectedPage === item.key,
+          [classes.selected]: selectedPageKey === item.key,
         });
 
         const renderCollapse = () => {
@@ -110,8 +111,10 @@ const Sidebar = (props: IPropsSidebar) => {
             item.action();
           }
 
-          if (item.url) {
-            dispatch(selectPage(item.key));
+          if (item.url && item.content) {
+            dispatch(setPageKey(item.key));
+
+            dispatch(setPageContent(item.content));
           }
 
           setOpen({ ...open, [item.key]: !open[item.key] });

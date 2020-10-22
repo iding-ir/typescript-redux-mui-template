@@ -1,5 +1,5 @@
 import React from "react";
-import Inbox from "@material-ui/icons/Inbox";
+import InboxIcon from "@material-ui/icons/Inbox";
 import ProfileIcon from "@material-ui/icons/AccountBox";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
 import PhotoIcon from "@material-ui/icons/PhotoCamera";
@@ -11,6 +11,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 
 import * as URLS from "../constants/urls";
 import Theme from "../components/Sidebar/Theme";
+import Inbox from "../pages/Inbox";
 import Profile from "../pages/Profile";
 
 export interface IRoute {
@@ -33,8 +34,9 @@ export const routes: IRoutes = [
   {
     key: "inbox",
     label: "sidebar.inbox",
-    icon: <Inbox />,
+    icon: <InboxIcon />,
     url: URLS.inbox,
+    content: <Inbox />,
   },
   {
     key: "profile",
@@ -47,25 +49,21 @@ export const routes: IRoutes = [
     key: "multimedia",
     label: "sidebar.multimedia",
     icon: <MultimediaIcon />,
-    // url: URLS.multimedia,
     items: [
       {
         key: "photo",
         label: "sidebar.photo",
         icon: <PhotoIcon />,
-        url: URLS.photo,
       },
       {
         key: "video",
         label: "sidebar.video",
         icon: <VideoIcon />,
-        url: URLS.video,
       },
       {
         key: "audio",
         label: "sidebar.audio",
         icon: <AudioIcon />,
-        url: URLS.audio,
       },
     ],
   },
@@ -73,23 +71,18 @@ export const routes: IRoutes = [
     key: "schedule",
     label: "sidebar.schedule",
     icon: <ScheduleIcon />,
-    // url: URLS.schedule,
     action: () => {
       console.log("Clicked!");
     },
   },
   {
     key: "theme",
-    // label: "sidebar.theme",
-    // icon: <ThemeIcon />,
-    // url: URLS.theme,
     custom: <Theme />,
   },
   {
     key: "settings",
     label: "sidebar.settings",
     icon: <SettingsIcon />,
-    // url: URLS.settings,
     action: () => {
       console.log("Clicked!");
     },
