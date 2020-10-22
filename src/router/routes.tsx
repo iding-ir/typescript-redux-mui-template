@@ -6,13 +6,12 @@ import PhotoIcon from "@material-ui/icons/PhotoCamera";
 import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ScheduleIcon from "@material-ui/icons/Alarm";
-// import ThemeIcon from "@material-ui/icons/EventNote";
-import SettingsIcon from "@material-ui/icons/Settings";
 
 import * as URLS from "../constants/urls";
-import Theme from "../components/Sidebar/Theme";
-import Inbox from "../pages/Inbox";
-import Profile from "../pages/Profile";
+import ItemTheme from "../components/Sidebar/ItemTheme";
+import ItemSettings from "../components/Sidebar/ItemSettings";
+import Inbox from "../components/pages/Inbox";
+import Profile from "../components/pages/Profile";
 
 export interface IRoute {
   key: string;
@@ -77,14 +76,10 @@ export const routes: IRoutes = [
   },
   {
     key: "theme",
-    custom: <Theme />,
+    custom: <ItemTheme />,
   },
   {
     key: "settings",
-    label: "sidebar.settings",
-    icon: <SettingsIcon />,
-    action: () => {
-      console.log("Clicked!");
-    },
+    custom: <ItemSettings />,
   },
 ];

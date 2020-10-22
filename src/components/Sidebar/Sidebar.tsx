@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import {
@@ -72,7 +72,7 @@ const Sidebar = (props: IPropsSidebar) => {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [open, setOpen] = React.useState<{ [key: string]: boolean }>({});
+  const [open, setOpen] = useState<{ [key: string]: boolean }>({});
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
   const selectedPage = useSelector((state: IState) => state.page.selected);
@@ -86,7 +86,7 @@ const Sidebar = (props: IPropsSidebar) => {
       list.map((item: IRoute | IRouteGroup) => {
         const className = clsx(classes.item, {
           [classes.nested]: nested,
-          [classes.selected]: selectedPage === item.key,
+          [classes.selected]: selectedPage.key === item.key,
         });
 
         const renderCollapse = () => {

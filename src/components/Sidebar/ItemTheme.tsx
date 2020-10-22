@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -11,9 +12,19 @@ import { toggleSidebarSwitch } from "../../actions/sidebar";
 import { changeTheme } from "../../actions/theme";
 import { IState } from "../../reducers";
 
-import "./Theme.scss";
+import "./ItemTheme.scss";
 
-const Theme = () => {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    item: {
+      borderLeft: "3px solid",
+      borderColor: "transparent",
+    },
+  })
+);
+
+const ItemTheme = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -21,7 +32,7 @@ const Theme = () => {
   const theme = useSelector((state: IState) => state.theme);
 
   return (
-    <ListItem button>
+    <ListItem button className={classes.item}>
       <ListItemIcon>
         <ThemeIcon />
       </ListItemIcon>
@@ -49,4 +60,4 @@ const Theme = () => {
   );
 };
 
-export default Theme;
+export default ItemTheme;
