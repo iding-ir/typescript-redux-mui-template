@@ -3,39 +3,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import NotesIcon from "@material-ui/icons/EventNote";
+import ThemeIcon from "@material-ui/icons/EventNote";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
 import { toggleSidebarSwitch } from "../../actions/sidebar";
+import { changeTheme } from "../../actions/theme";
 import { IState } from "../../reducers";
 
-import "./Notes.scss";
+import "./Theme.scss";
 
-const Notes = () => {
+const Theme = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const notes = useSelector((state: IState) => state.sidebar.switches.notes);
+  const checked = useSelector((state: IState) => state.sidebar.switches.theme);
+  const theme = useSelector((state: IState) => state.theme);
 
   return (
     <ListItem button>
       <ListItemIcon>
-        <NotesIcon />
+        <ThemeIcon />
       </ListItemIcon>
 
       <FormControlLabel
         control={
           <Switch
-            checked={notes}
+            checked={checked}
             color="primary"
             name="checkedA"
             onClick={() => {
-              dispatch(toggleSidebarSwitch("notes"));
+              const newTheme = theme === "light" ? "dark" : "light";
+
+              dispatch(changeTheme(newTheme));
+
+              dispatch(toggleSidebarSwitch("theme"));
             }}
           />
         }
-        label={t("sidebar.notes")}
+        label={t("sidebar.theme")}
         labelPlacement="start"
         className="sidebar-toggle"
       />
@@ -43,4 +49,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default Theme;

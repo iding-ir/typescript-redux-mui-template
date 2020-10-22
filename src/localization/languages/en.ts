@@ -11,7 +11,7 @@ export default {
     video: "Video",
     audio: "Audio",
     schedule: "Schedule",
-    notes: "Notes",
+    theme: "Dark Theme",
     settings: "Settings",
   },
   content: {

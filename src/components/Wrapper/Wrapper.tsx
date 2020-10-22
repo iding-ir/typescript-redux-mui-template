@@ -1,5 +1,8 @@
 import React from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
+
+import useTheme from "../../theme";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -15,8 +18,17 @@ interface IPropsWrapper {
 
 const Wrapper = (props: IPropsWrapper) => {
   const classes = useStyles();
+  const { theme } = useTheme();
 
-  return <div className={classes.root}>{props.children}</div>;
+  return (
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+
+        {props.children}
+      </div>
+    </ThemeProvider>
+  );
 };
 
 export default Wrapper;

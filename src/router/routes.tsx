@@ -6,11 +6,11 @@ import PhotoIcon from "@material-ui/icons/PhotoCamera";
 import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ScheduleIcon from "@material-ui/icons/Alarm";
-// import NotesIcon from "@material-ui/icons/EventNote";
+// import ThemeIcon from "@material-ui/icons/EventNote";
 import SettingsIcon from "@material-ui/icons/Settings";
 
 import * as URLS from "../constants/urls";
-import Notes from "../components/Sidebar/Notes";
+import Theme from "../components/Sidebar/Theme";
 import Profile from "../pages/Profile";
 
 export interface IRoute {
@@ -79,11 +79,11 @@ export const routes: IRoutes = [
     },
   },
   {
-    key: "notes",
-    // label: "sidebar.notes",
-    // icon: <NotesIcon />,
-    // url: URLS.notes,
-    custom: <Notes />,
+    key: "theme",
+    // label: "sidebar.theme",
+    // icon: <ThemeIcon />,
+    // url: URLS.theme,
+    custom: <Theme />,
   },
   {
     key: "settings",

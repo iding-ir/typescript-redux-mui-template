@@ -6,7 +6,6 @@ import {
   SIDEBAR_PAGE_SELECT,
 } from "../constants/redux";
 import { routes } from "../router/routes";
-
 import { IActionSidebar } from "../actions/sidebar";
 
 export interface IStateSidebar {
@@ -20,7 +19,7 @@ export interface IStateSidebar {
 const initialState: IStateSidebar = {
   open: false,
   switches: {
-    notes: true,
+    theme: true,
   },
   selectedPage: routes[0].key,
 };
