@@ -43,8 +43,16 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: drawerWidth,
     },
+    item: {
+      borderLeft: "3px solid",
+      borderColor: "transparent",
+    },
     nested: {
       paddingLeft: theme.spacing(4),
+    },
+    selected: {
+      borderLeft: "3px solid",
+      borderColor: theme.palette.secondary.main,
     },
     link: {
       display: "flex",
@@ -65,6 +73,9 @@ const Sidebar = (props: IPropsSidebar) => {
   const [open, setOpen] = React.useState<{ [key: string]: boolean }>({});
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
+  const selectedPage = useSelector(
+    (state: IState) => state.sidebar.selectedPage
+  );
 
   const handleDrawerToggle = () => {
     dispatch(toggleSidebar());
@@ -73,8 +84,9 @@ const Sidebar = (props: IPropsSidebar) => {
   const renderList = (list: IRoutes, nested: boolean) => {
     const renderItems = () =>
       list.map((item: IRoute | IRouteGroup) => {
-        const className = clsx({
+        const className = clsx(classes.item, {
           [classes.nested]: nested,
+          [classes.selected]: selectedPage === item.key,
         });
 
         const renderCollapse = () => {
