@@ -1,5 +1,5 @@
 import { PAGE_SET } from "../constants/redux";
-import { IRoute } from "../router/routes";
+import { IRoute } from "../components/AppRouter/routes";
 
 export interface IActionPage {
   type: string;

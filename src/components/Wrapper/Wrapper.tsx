@@ -3,6 +3,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 
 import useTheme from "../../theme";
+import AppRouter from "../AppRouter/AppRouter";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -21,13 +22,15 @@ const Wrapper = (props: IPropsWrapper) => {
   const { theme } = useTheme();
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
+    <AppRouter>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <CssBaseline />
 
-        {props.children}
-      </div>
-    </ThemeProvider>
+          {props.children}
+        </div>
+      </ThemeProvider>
+    </AppRouter>
   );
 };
 

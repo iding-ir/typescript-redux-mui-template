@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import { drawerWidth } from "../../constants";
 import { toggleSidebar } from "../../actions/sidebar";
 import { setPage } from "../../actions/page";
-import { routes, IRoute, IRouteGroup, IRoutes } from "../../router/routes";
+import { routes, IRoute, IRouteGroup, IRoutes } from "../AppRouter/routes";
 import { IState } from "../../reducers";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -117,22 +117,40 @@ const Sidebar = (props: IPropsSidebar) => {
           setOpen({ ...open, [item.key]: !open[item.key] });
         };
 
+        const renderItemContent = () => {
+          if (item.label) {
+            const linkContent = (
+              <>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+
+                <ListItemText primary={t(item.label)} />
+
+                {renderCollapseIcon()}
+              </>
+            );
+
+            if (item.url) {
+              return (
+                <Link to={item.url} className={classes.link}>
+                  {linkContent}
+                </Link>
+              );
+            }
+
+            return linkContent;
+          }
+        };
+
         const renderItem = () => {
           if (item.custom) {
             return item.custom;
-          } else if (item.label) {
-            return (
-              <ListItem button className={className} onClick={onClick}>
-                <Link to={item.url || ""} className={classes.link}>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-
-                  <ListItemText primary={t(item.label)} />
-
-                  {renderCollapseIcon()}
-                </Link>
-              </ListItem>
-            );
           }
+
+          return (
+            <ListItem button className={className} onClick={onClick}>
+              {renderItemContent()}
+            </ListItem>
+          );
         };
 
         return (

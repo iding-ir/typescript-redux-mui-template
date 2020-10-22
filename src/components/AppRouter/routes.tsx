@@ -7,11 +7,14 @@ import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ScheduleIcon from "@material-ui/icons/Alarm";
 
-import * as URLS from "../constants/urls";
-import ItemTheme from "../components/Sidebar/ItemTheme";
-import ItemSettings from "../components/Sidebar/ItemSettings";
-import Inbox from "../components/pages/Inbox";
-import Profile from "../components/pages/Profile";
+import * as URLS from "../../constants/urls";
+import ItemTheme from "../Sidebar/ItemTheme";
+import ItemSettings from "../Sidebar/ItemSettings";
+import Inbox from "../pages/Inbox";
+import Profile from "../pages/Profile";
+import Photo from "../pages/Photo";
+import Video from "../pages/Video";
+import Audio from "../pages/Audio";
 
 export interface IRoute {
   key: string;
@@ -53,16 +56,22 @@ export const routes: IRoutes = [
         key: "photo",
         label: "sidebar.photo",
         icon: <PhotoIcon />,
+        url: URLS.photo,
+        content: <Photo />,
       },
       {
         key: "video",
         label: "sidebar.video",
         icon: <VideoIcon />,
+        url: URLS.video,
+        content: <Video />,
       },
       {
         key: "audio",
         label: "sidebar.audio",
         icon: <AudioIcon />,
+        url: URLS.audio,
+        content: <Audio />,
       },
     ],
   },
@@ -71,7 +80,7 @@ export const routes: IRoutes = [
     label: "sidebar.schedule",
     icon: <ScheduleIcon />,
     action: () => {
-      console.log("Clicked!");
+      alert();
     },
   },
   {
