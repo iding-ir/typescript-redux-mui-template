@@ -1,5 +1,4 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
@@ -9,8 +8,6 @@ import SettingsIcon from "@material-ui/icons/Settings";
 
 import "./SettingsModal.scss";
 import Modal from "../Modal/Modal";
-import { openModal } from "../../actions/modal";
-import { IState } from "../../reducers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,23 +21,26 @@ const useStyles = makeStyles((theme: Theme) =>
 const ItemSettings = () => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
-  const open = useSelector((state: IState) => state.modal.open);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
-    dispatch(openModal());
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const renderModal = () => {
-    if (open) {
-      return (
-        <Modal
-          title={t("modal.title")}
-          content={<div>{t("modal.content")}</div>}
-        />
-      );
-    }
+    return (
+      <Modal
+        open={open}
+        title={t("modal.title")}
+        content={<div>{t("modal.content")}</div>}
+        handleClose={handleClose}
+      />
+    );
   };
 
   return (

@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   createStyles,
   Theme,
@@ -15,9 +14,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { useTranslation } from "react-i18next";
-
-import { closeModal } from "../../actions/modal";
-import { IState } from "../../reducers";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -80,20 +76,15 @@ const DialogActions = withStyles((theme: Theme) => ({
 }))(MuiDialogActions);
 
 interface IPropsModal {
+  open: boolean;
   title: string;
   content: JSX.Element;
+  handleClose: () => void;
 }
 
 const Modal = (props: IPropsModal) => {
-  const { title, content } = props;
+  const { open, title, content, handleClose } = props;
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-
-  const open = useSelector((state: IState) => state.modal.open);
-
-  const handleClose = () => {
-    dispatch(closeModal());
-  };
 
   return (
     <div>
