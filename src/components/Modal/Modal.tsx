@@ -79,12 +79,20 @@ interface IPropsModal {
   open: boolean;
   title: string;
   content: JSX.Element;
+  toolbar?: JSX.Element;
   handleClose: () => void;
 }
 
 const Modal = (props: IPropsModal) => {
-  const { open, title, content, handleClose } = props;
+  const { open, title, content, toolbar, handleClose } = props;
   const { t } = useTranslation();
+
+  const renderToolbar = () =>
+    toolbar || (
+      <Button autoFocus onClick={handleClose} color="primary">
+        {t("modal.close")}
+      </Button>
+    );
 
   return (
     <div>
@@ -95,11 +103,7 @@ const Modal = (props: IPropsModal) => {
 
         <DialogContent dividers>{content}</DialogContent>
 
-        <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            {t("modal.close")}
-          </Button>
-        </DialogActions>
+        <DialogActions>{renderToolbar()}</DialogActions>
       </Dialog>
     </div>
   );
