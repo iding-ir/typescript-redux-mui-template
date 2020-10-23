@@ -1,35 +1,29 @@
-import { SWITCH_TOGGLE } from "../constants/redux";
-import { routes } from "../routes";
-import { IActionSidebar } from "../actions/switches";
+import { SWITCH_TOGGLE, SWITCH_ON, SWITCH_OFF } from "../constants/redux";
+import { IActionSwitches } from "../actions/switches";
 
-export interface IStateSidebar {
-  switches: {
-    [key: string]: boolean;
-  };
+export interface IStateSwitches {
+  [key: string]: boolean;
 }
 
-const initialState: IStateSidebar = {
-  switches: {
-    theme: true,
-  },
+const initialState: IStateSwitches = {
+  theme: true,
 };
 
-const reducer = (state = initialState, action: IActionSidebar) => {
+const reducer = (state = initialState, action: IActionSwitches) => {
   switch (action.type) {
     case SWITCH_TOGGLE:
       const value: { [key: string]: boolean } = {};
 
       if (typeof action.payload === "string") {
-        value[action.payload] = !state.switches[action.payload];
+        value[action.payload] = !state[action.payload];
       }
 
       return {
         ...state,
-        switches: {
-          ...state.switches,
-          ...value,
-        },
+        ...value,
       };
+    case SWITCH_ON:
+    case SWITCH_OFF:
     default:
       return state;
   }

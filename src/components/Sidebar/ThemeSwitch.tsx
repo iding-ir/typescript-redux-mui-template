@@ -8,7 +8,7 @@ import ThemeIcon from "@material-ui/icons/EventNote";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
-import { toggleSidebarSwitch } from "../../actions/sidebar";
+import { toggleSwitch } from "../../actions/switches";
 import { changeTheme } from "../../actions/theme";
 import { IState } from "../../reducers";
 
@@ -28,7 +28,7 @@ const ItemTheme = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const checked = useSelector((state: IState) => state.sidebar.switches.theme);
+  const checked = useSelector((state: IState) => state.switches.theme);
   const theme = useSelector((state: IState) => state.theme);
 
   return (
@@ -48,7 +48,7 @@ const ItemTheme = () => {
 
               dispatch(changeTheme(newTheme));
 
-              dispatch(toggleSidebarSwitch("theme"));
+              dispatch(toggleSwitch("theme"));
             }}
           />
         }
