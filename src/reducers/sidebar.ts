@@ -4,7 +4,7 @@ import {
   SIDEBAR_TOGGLE,
   SIDEBAR_SWITCH_TOGGLE,
 } from "../constants/redux";
-import { routes } from "../components/AppRouter/routes";
+import { routes } from "../routes";
 import { IActionSidebar } from "../actions/sidebar";
 
 export interface IStateSidebar {

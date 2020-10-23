@@ -7,9 +7,9 @@ import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ScheduleIcon from "@material-ui/icons/Alarm";
 
-import * as URLS from "../../constants/urls";
-import ItemTheme from "../Sidebar/ItemTheme";
-import ItemSettings from "../Sidebar/ItemSettings";
+import * as URLS from "../constants/urls";
+import ItemTheme from "../components/Sidebar/ItemTheme";
+import ItemSettings from "../components/Sidebar/ItemSettings";
 import Inbox from "../pages/Inbox";
 import Profile from "../pages/Profile";
 import Photo from "../pages/Photo";

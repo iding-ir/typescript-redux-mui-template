@@ -7,7 +7,7 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
-import { routes, IRoutes, IRoute, IRouteGroup } from "./routes";
+import { routes, IRoutes, IRoute, IRouteGroup } from "../../routes";
 import { setPage } from "../../actions/page";
 import * as URLS from "../../constants/urls";
 

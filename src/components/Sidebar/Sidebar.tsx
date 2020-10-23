@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import { drawerWidth } from "../../constants";
 import { toggleSidebar } from "../../actions/sidebar";
 import { setPage } from "../../actions/page";
-import { routes, IRoute, IRouteGroup, IRoutes } from "../AppRouter/routes";
+import { routes, IRoute, IRouteGroup, IRoutes } from "../../routes";
 import { IState } from "../../reducers";
 
 const useStyles = makeStyles((theme: Theme) =>
