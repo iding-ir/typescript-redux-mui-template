@@ -9,7 +9,7 @@ const Audio = (props: IPropsAudio) => {
 
   return (
     <>
-      <Typography paragraph>{t("content.p2")}</Typography>
+      <Typography paragraph>{t("content.p1")}</Typography>
     </>
   );
 };
