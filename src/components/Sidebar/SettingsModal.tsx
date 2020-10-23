@@ -7,7 +7,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import SettingsIcon from "@material-ui/icons/Settings";
 
-import "./ItemSettings.scss";
+import "./SettingsModal.scss";
 import Modal from "../Modal/Modal";
 import { openModal } from "../../actions/modal";
 import { IState } from "../../reducers";

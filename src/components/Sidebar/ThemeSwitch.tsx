@@ -12,7 +12,7 @@ import { toggleSidebarSwitch } from "../../actions/sidebar";
 import { changeTheme } from "../../actions/theme";
 import { IState } from "../../reducers";
 
-import "./ItemTheme.scss";
+import "./ThemeSwitch.scss";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
