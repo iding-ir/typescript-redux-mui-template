@@ -117,16 +117,20 @@ const Sidebar = (props: IPropsSidebar) => {
           setOpen({ ...open, [item.key]: !open[item.key] });
         };
 
-        const renderItemContent = () => {
+        const renderItem = () => {
+          if (item.custom) {
+            return item.custom;
+          }
+
           if (item.label) {
             const linkContent = (
-              <>
+              <ListItem button className={className} onClick={onClick}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
 
                 <ListItemText primary={t(item.label)} />
 
                 {renderCollapseIcon()}
-              </>
+              </ListItem>
             );
 
             if (item.url) {
@@ -139,18 +143,6 @@ const Sidebar = (props: IPropsSidebar) => {
 
             return linkContent;
           }
-        };
-
-        const renderItem = () => {
-          if (item.custom) {
-            return item.custom;
-          }
-
-          return (
-            <ListItem button className={className} onClick={onClick}>
-              {renderItemContent()}
-            </ListItem>
-          );
         };
 
         return (
