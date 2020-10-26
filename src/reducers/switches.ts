@@ -12,18 +12,20 @@ const initialState: IStateSwitches = {
 const reducer = (state = initialState, action: IActionSwitches) => {
   switch (action.type) {
     case SWITCH_TOGGLE:
-      const value: { [key: string]: boolean } = {};
-
-      if (typeof action.payload === "string") {
-        value[action.payload] = !state[action.payload];
-      }
-
       return {
         ...state,
-        ...value,
+        [action.payload]: !state[action.payload],
       };
     case SWITCH_ON:
+      return {
+        ...state,
+        [action.payload]: true,
+      };
     case SWITCH_OFF:
+      return {
+        ...state,
+        [action.payload]: false,
+      };
     default:
       return state;
   }

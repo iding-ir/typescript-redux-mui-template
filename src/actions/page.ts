@@ -3,7 +3,7 @@ import { IRoute } from "../routes";
 
 export interface IActionPage {
   type: string;
-  payload?: IRoute;
+  payload: IRoute;
 }
 
 export const setPage = (payload: IRoute): IActionPage => ({

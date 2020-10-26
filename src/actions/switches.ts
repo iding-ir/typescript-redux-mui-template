@@ -2,7 +2,7 @@ import { SWITCH_TOGGLE, SWITCH_ON, SWITCH_OFF } from "../constants/redux";
 
 export interface IActionSwitches {
   type: string;
-  payload?: string;
+  payload: string;
 }
 
 export const toggleSwitch = (payload: string): IActionSwitches => ({
@@ -10,10 +10,12 @@ export const toggleSwitch = (payload: string): IActionSwitches => ({
   payload,
 });
 
-export const switchOn = (): IActionSwitches => ({
+export const switchOn = (payload: string): IActionSwitches => ({
   type: SWITCH_ON,
+  payload,
 });
 
-export const switchOff = (): IActionSwitches => ({
+export const switchOff = (payload: string): IActionSwitches => ({
   type: SWITCH_OFF,
+  payload,
 });
