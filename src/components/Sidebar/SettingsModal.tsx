@@ -6,7 +6,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import SettingsIcon from "@material-ui/icons/Settings";
 
-import "./SettingsModal.scss";
 import Modal from "../Modal/Modal";
 
 const useStyles = makeStyles((theme: Theme) =>

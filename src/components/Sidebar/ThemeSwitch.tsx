@@ -4,6 +4,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { useTranslation } from "react-i18next";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
 import ThemeIcon from "@material-ui/icons/EventNote";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
@@ -11,8 +13,6 @@ import Switch from "@material-ui/core/Switch";
 import { toggleSwitch } from "../../actions/switches";
 import { changeTheme } from "../../actions/theme";
 import { IState } from "../../reducers";
-
-import "./ThemeSwitch.scss";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,30 +32,27 @@ const ItemTheme = () => {
   const theme = useSelector((state: IState) => state.theme);
 
   return (
-    <ListItem button className={classes.item}>
+    <ListItem className={classes.item}>
       <ListItemIcon>
         <ThemeIcon />
       </ListItemIcon>
 
-      <FormControlLabel
-        control={
-          <Switch
-            checked={checked}
-            color="primary"
-            name="checkedA"
-            onClick={() => {
-              const newTheme = theme === "light" ? "dark" : "light";
+      <ListItemText id="switch-label-theme" primary={t("sidebar.theme")} />
 
-              dispatch(changeTheme(newTheme));
+      <ListItemSecondaryAction>
+        <Switch
+          edge="end"
+          onChange={() => {
+            const newTheme = theme === "light" ? "dark" : "light";
 
-              dispatch(toggleSwitch("theme"));
-            }}
-          />
-        }
-        label={t("sidebar.theme")}
-        labelPlacement="start"
-        className="sidebar-toggle"
-      />
+            dispatch(changeTheme(newTheme));
+
+            dispatch(toggleSwitch("theme"));
+          }}
+          checked={checked}
+          inputProps={{ "aria-labelledby": "switch-label-theme" }}
+        />
+      </ListItemSecondaryAction>
     </ListItem>
   );
 };
